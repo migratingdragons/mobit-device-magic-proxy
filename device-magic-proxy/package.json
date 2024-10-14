@@ -2,7 +2,7 @@
 	"name": "mobit-device-magic-proxy",
 	"version": "1.0.0",
 	"description": "Device Magic Proxy for Mobit",
-	"main": "app.js",
+	"main": "dist/app.js",
 	"repository": "https://github.com/your-repo/mobit-device-magic-proxy",
 	"author": "Your Name",
 	"license": "MIT",
@@ -11,6 +11,8 @@
 	},
 	"scripts": {
 		"build": "tsc",
+		"start": "node dist/app.js",
+		"dev": "ts-node device-magic-proxy/app.ts",
 		"test": "mocha -r ts-node/register tests/unit/**/*.ts"
 	},
 	"devDependencies": {
