@@ -1,39 +1,18 @@
 {
-	"name": "mobit-device-magic-proxy",
-	"version": "1.0.0",
-	"description": "Device Magic Proxy for Mobit",
-	"main": "dist/app.js",
-	"repository": "https://github.com/migratingdragons/mobit-device-magic-proxy",
-	"author": "Your Name",
-	"license": "All Rights Reserved",
-	"dependencies": {
-		"axios": "^1.7.7"
-	},
-	"scripts": {
-		"build": "tsc && mkdir -p dist && cp config.json dist/ && cp -r node_modules dist/",
-		"start": "node dist/app.js",
-		"dev": "ts-node device-magic-proxy/app.ts",
-		"test": "mocha -r ts-node/register tests/unit/**/*.ts",
-		"lint": "tsc --noEmit",
-		"deploy": "npm run build:no-cache && sam deploy --guided --profile mobit",
-		"deploy:quick": "npm run build:no-cache && sam deploy --profile mobit",
-		"clean": "rm -rf dist",
-		"build:all": "npm run clean && npm run build && sam build",
-		"clear-cache": "npm cache clean --force",
-		"build:no-cache": "npm run clean && npm run build && sam build --no-cached --parallel",
-		"test:api": "./test_api.sh",
-		"deploy:force": "rm -rf dist .aws-sam && sam build --parallel --debug && sam deploy --profile mobit --force-upload --debug"
-	},
-	"devDependencies": {
-		"@types/aws-lambda": "^8.10.131",
-		"@types/chai": "^4.3.11",
-		"@types/mocha": "^10.0.6",
-		"@types/node": "^20.10.5",
-		"@types/sinon": "^17.0.2",
-		"chai": "^4.3.10",
-		"mocha": "^10.2.0",
-		"sinon": "^17.0.1",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.3.3"
-	}
+  "name": "mobit-device-magic-proxy",
+  "version": "1.0.0",
+  "description": "Device Magic Proxy for Mobit",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc && cp config.json dist/",
+    "deploy": "npm run build && sam build && sam deploy --profile mobit --force-upload"
+  },
+  "dependencies": {
+    "axios": "^1.7.7"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.131",
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3"
+  }
 }

@@ -1,25 +1,14 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  mobit-device-magic-proxy
-
-  Sample SAM Template for mobit-device-magic-proxy
-  
-Globals:
-  Function:
-    Timeout: 3
+Description: Device Magic Proxy for Mobit
 
 Resources:
   DeviceMagicProxyFunction:
     Type: AWS::Serverless::Function
-    Metadata:
-      BuildMethod: makefile
     Properties:
-      CodeUri: device-magic-proxy/dist
-      Handler: app.lambdaHandler
+      CodeUri: device-magic-proxy/
+      Handler: dist/app.lambdaHandler
       Runtime: nodejs18.x
-      Architectures:
-        - x86_64
       Events:
         DeviceMagicProxy:
           Type: Api
@@ -31,9 +20,3 @@ Outputs:
   DeviceMagicProxyApi:
     Description: "API Gateway endpoint URL for Prod stage for Device Magic Proxy function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/proxy/"
-  DeviceMagicProxyFunction:
-    Description: "Device Magic Proxy Lambda Function ARN"
-    Value: !GetAtt DeviceMagicProxyFunction.Arn
-  DeviceMagicProxyFunctionIamRole:
-    Description: "Implicit IAM Role created for Device Magic Proxy function"
-    Value: !GetAtt DeviceMagicProxyFunctionRole.Arn
