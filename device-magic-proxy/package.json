@@ -1,18 +1,18 @@
 {
-  "name": "mobit-device-magic-proxy",
-  "version": "1.0.0",
-  "description": "Device Magic Proxy for Mobit",
-  "main": "dist/app.js",
-  "scripts": {
-    "build": "tsc && cp config.json dist/",
-    "deploy": "npm run build && sam build && sam deploy --profile mobit --force-upload"
-  },
-  "dependencies": {
-    "axios": "^1.7.7"
-  },
-  "devDependencies": {
-    "@types/aws-lambda": "^8.10.131",
-    "@types/node": "^20.10.5",
-    "typescript": "^5.3.3"
-  }
+	"name": "mobit-device-magic-proxy",
+	"version": "1.0.0",
+	"description": "Device Magic Proxy for Mobit",
+	"main": "dist/app.js",
+	"scripts": {
+		"build": "tsc && cp config.json dist/",
+		"deploy": "npm run build && sam build && sam deploy --profile mobit --force-upload"
+	},
+	"dependencies": {
+		"axios": "^1.7.7"
+	},
+	"devDependencies": {
+		"@types/aws-lambda": "^8.10.131",
+		"@types/node": "^20.10.5",
+		"typescript": "^5.3.3"
+	}
 }
