@@ -20,7 +20,7 @@ This guide will walk you through the process of installing, deploying, and setti
 
 2. Install dependencies:
    ```
-   cd hello-world
+   cd device-magic-proxy
    npm install
    cd ..
    ```

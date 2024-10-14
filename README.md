@@ -11,7 +11,7 @@ This project contains a serverless application that acts as a proxy for Device M
 
 ## Project Structure
 
-- `hello-world/` - Contains the Lambda function code
+- `device-magic-proxy/` - Contains the Lambda function code
 - `events/` - Sample events for testing
 - `template.yaml` - SAM template defining AWS resources
 - `INSTALL.md` - Detailed installation and setup guide
@@ -30,7 +30,7 @@ To contribute to this project or make modifications:
 
 1. Clone the repository
 2. Make your changes
-3. Run tests: `cd hello-world && npm test`
+3. Run tests: `cd device-magic-proxy && npm test`
 4. Build and deploy using SAM CLI
 
 ## Resources
