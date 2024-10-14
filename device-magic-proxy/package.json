@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Device Magic Proxy for Mobit",
 	"main": "dist/app.js",
-	"repository": "https://github.com/your-repo/mobit-device-magic-proxy",
+	"repository": "https://github.com/migratingdragons/mobit-device-magic-proxy",
 	"author": "Your Name",
 	"license": "All Rights Reserved",
 	"dependencies": {
