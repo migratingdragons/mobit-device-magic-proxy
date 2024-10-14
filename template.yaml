@@ -16,7 +16,7 @@ Resources:
       BuildMethod: makefile
     Properties:
       CodeUri: device-magic-proxy/
-      Handler: dist/app.lambdaHandler
+      Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64

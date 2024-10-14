@@ -10,7 +10,7 @@
 		"axios": "^1.7.7"
 	},
 	"scripts": {
-		"build": "tsc && cp config.json dist/",
+		"build": "tsc && cp config.json dist/ && cp -r node_modules dist/",
 		"start": "node dist/app.js",
 		"dev": "ts-node device-magic-proxy/app.ts",
 		"test": "mocha -r ts-node/register tests/unit/**/*.ts",
