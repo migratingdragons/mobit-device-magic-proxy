@@ -29,7 +29,7 @@ After deployment, the application will provide an API Gateway endpoint. Configur
 
 ## Testing the Deployed Application
 
-After deploying the application, you can test it using the provided bash script. This script sends a POST request to your API Gateway endpoint with a sample payload based on your actual configuration.
+After deploying the application, you can test it using the provided bash script `test_api.sh`. This script sends a POST request to your API Gateway endpoint with a sample payload based on your actual configuration.
 
 To use the script:
 
@@ -40,12 +40,15 @@ To use the script:
    cd device-magic-proxy
    ```
 
-3. Make the script executable:
+3. Open the `test_api.sh` file and update the `API_ENDPOINT` variable with your actual API Gateway endpoint URL. Look for the following line and replace it with your endpoint:
+   ```
+   API_ENDPOINT="https://your-api-gateway-endpoint.amazonaws.com/Prod/proxy"
+   ```
+
+4. Make the script executable (if it's not already):
    ```
    chmod +x test_api.sh
    ```
-
-4. Update the `API_ENDPOINT` variable in `test_api.sh` with your actual API Gateway endpoint URL.
 
 5. Run the test using npm:
    ```

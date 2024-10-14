@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Replace this with your actual API Gateway endpoint
-API_ENDPOINT="https://e6goocpt8a.execute-api.eu-west-2.amazonaws.com/Prod/proxy"
+# TODO: Replace this with your actual API Gateway endpoint
+API_ENDPOINT="https://your-api-gateway-endpoint.amazonaws.com/Prod/proxy"
 
 # Read the first form namespace from config.json
 FORM_NAMESPACE=$(jq -r '.[0].form_namespace' config.json)
