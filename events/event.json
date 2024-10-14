@@ -1,47 +1,47 @@
 {
-  "body": "{\"metadata\":{\"device_id\":\"iPhone_23E93FF7-F1A0-41C1-9F51-C5ACE3D46B41\",\"user_id\":null,\"username\":\"Chris Kelly\",\"submitted_at\":\"2023-10-25 08:30:46 +01:00\",\"received_at\":\"2023-10-25 07:30:49 +00:00\",\"submission_id\":\"85159293\",\"device_submission_identifier\":\"D2D48D93-C8D6-4CC6-AFAC-41CAA589AFC1\",\"submission_counter\":\"24806\",\"author_identifier\":\"iPhone_23E93FF7-F1A0-41C1-9F51-C5ACE3D46B41\",\"form_name\":\"Installers Check Sheet\",\"form_namespace\":\"http://www.devicemagic.com/xforms/68c66b50-e67d-0136-94d2-0a7ff68e9068\",\"form_version\":\"2.88\"},\"answers\":{\"Region\":{\"value\":\"Scotland\",\"geostamp\":\"lat=55.945921, long=-3.320635, alt=55.626793, hAccuracy=12.136354, vAccuracy=17.440609, timestamp=2023-10-23T11:57:32Z\"},\"Site\":{\"value\":\"West Craig's \"},\"Developer\":{\"value\":\"Miller Homes Scotland East\"},\"Is_a_Plot_Card_Required\":{\"value\":\"No\"},\"PV_Number\":{\"value\":\"6179PV\"},\"Project_Validator\":{\"value\":\"valid\"},\"Plot\":{\"value\":\"21\"},\"Installers_Name\":{\"value\":\"Chris Kelly\"},\"Team\":{\"value\":\"Team 8\"},\"Mobile\":{\"value\":\"+447470901172\"},\"Form_Date\":{\"value\":\"25-10-2023\"}}}",
-  "resource": "/{proxy+}",
-  "path": "/proxy",
-  "httpMethod": "POST",
-  "isBase64Encoded": false,
-  "queryStringParameters": null,
-  "pathParameters": {
-    "proxy": "proxy"
-  },
-  "stageVariables": null,
-  "headers": {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-    "Host": "1234567890.execute-api.us-east-1.amazonaws.com",
-    "User-Agent": "DeviceMagic/1.0",
-    "X-Forwarded-For": "192.0.2.1",
-    "X-Forwarded-Port": "443",
-    "X-Forwarded-Proto": "https"
-  },
-  "requestContext": {
-    "accountId": "123456789012",
-    "resourceId": "123456",
-    "stage": "Prod",
-    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
-    "requestTime": "25/Oct/2023:07:30:49 +0000",
-    "requestTimeEpoch": 1698218949000,
-    "identity": {
-      "cognitoIdentityPoolId": null,
-      "accountId": null,
-      "cognitoIdentityId": null,
-      "caller": null,
-      "accessKey": null,
-      "sourceIp": "192.0.2.1",
-      "cognitoAuthenticationType": null,
-      "cognitoAuthenticationProvider": null,
-      "userArn": null,
-      "userAgent": "DeviceMagic/1.0",
-      "user": null
-    },
-    "path": "/Prod/proxy",
-    "resourcePath": "/{proxy+}",
-    "httpMethod": "POST",
-    "apiId": "1234567890",
-    "protocol": "HTTP/1.1"
-  }
+	"body": "{\"metadata\":{\"device_id\":\"iPhone_23E93FF7-F1A0-41C1-9F51-C5ACE3D46B41\",\"user_id\":null,\"username\":\"Chris Kelly\",\"submitted_at\":\"2023-10-25 08:30:46 +01:00\",\"received_at\":\"2023-10-25 07:30:49 +00:00\",\"submission_id\":\"85159293\",\"device_submission_identifier\":\"D2D48D93-C8D6-4CC6-AFAC-41CAA589AFC1\",\"submission_counter\":\"24806\",\"author_identifier\":\"iPhone_23E93FF7-F1A0-41C1-9F51-C5ACE3D46B41\",\"form_name\":\"Installers Check Sheet\",\"form_namespace\":\"http://www.devicemagic.com/xforms/68c66b50-e67d-0136-94d2-0a7ff68e9068\",\"form_version\":\"2.88\"},\"answers\":{\"Region\":{\"value\":\"Scotland\",\"geostamp\":\"lat=55.945921, long=-3.320635, alt=55.626793, hAccuracy=12.136354, vAccuracy=17.440609, timestamp=2023-10-23T11:57:32Z\"},\"Site\":{\"value\":\"West Craig's \"},\"Developer\":{\"value\":\"Miller Homes Scotland East\"},\"Is_a_Plot_Card_Required\":{\"value\":\"No\"},\"PV_Number\":{\"value\":\"6179PV\"},\"Project_Validator\":{\"value\":\"valid\"},\"Plot\":{\"value\":\"21\"},\"Installers_Name\":{\"value\":\"Chris Kelly\"},\"Team\":{\"value\":\"Team 8\"},\"Mobile\":{\"value\":\"+447470901172\"},\"Form_Date\":{\"value\":\"25-10-2023\"}}}",
+	"resource": "/{proxy+}",
+	"path": "/proxy",
+	"httpMethod": "POST",
+	"isBase64Encoded": false,
+	"queryStringParameters": null,
+	"pathParameters": {
+		"proxy": "proxy"
+	},
+	"stageVariables": null,
+	"headers": {
+		"Accept": "application/json",
+		"Content-Type": "application/json",
+		"Host": "1234567890.execute-api.us-east-1.amazonaws.com",
+		"User-Agent": "DeviceMagic/1.0",
+		"X-Forwarded-For": "192.0.2.1",
+		"X-Forwarded-Port": "443",
+		"X-Forwarded-Proto": "https"
+	},
+	"requestContext": {
+		"accountId": "123456789012",
+		"resourceId": "123456",
+		"stage": "Prod",
+		"requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+		"requestTime": "25/Oct/2023:07:30:49 +0000",
+		"requestTimeEpoch": 1698218949000,
+		"identity": {
+			"cognitoIdentityPoolId": null,
+			"accountId": null,
+			"cognitoIdentityId": null,
+			"caller": null,
+			"accessKey": null,
+			"sourceIp": "192.0.2.1",
+			"cognitoAuthenticationType": null,
+			"cognitoAuthenticationProvider": null,
+			"userArn": null,
+			"userAgent": "DeviceMagic/1.0",
+			"user": null
+		},
+		"path": "/Prod/proxy",
+		"resourcePath": "/{proxy+}",
+		"httpMethod": "POST",
+		"apiId": "1234567890",
+		"protocol": "HTTP/1.1"
+	}
 }
