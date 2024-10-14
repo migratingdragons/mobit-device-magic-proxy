@@ -1,7 +1,12 @@
 [
 	{
-		"name": "Installers Check Sheet",
-		"form_namespace": "http://www.devicemagic.com/xforms/68c66b50-e67d-0136-94d2-0a7ff68e9068",
-		"destination_url": "https://destination.com/location"
+		"name": "UPOWA 1.Panel Installation Check Sheet",
+		"form_namespace": "http://www.devicemagic.com/xforms/f6c1fb10-2ab0-013b-a6a7-661e80d8c327",
+		"destination_url": " https://script.google.com/macros/s/AKfycbxSe7MbW6d9EbbAsv9enuWF84po_mkoapsMG2jZwCwQ5Xd_2xD3ce6D_O2ZJ0YGzbcG1Q/exec"
+	},
+	{
+		"name": "Reviewers Check Sheet",
+		"form_namespace": "http://www.devicemagic.com/xforms/68c66b50-e67d-0136-94d2-0a7ff68e9021",
+		"destination_url": "https://destination.com/123"
 	}
 ]
