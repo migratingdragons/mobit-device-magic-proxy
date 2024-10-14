@@ -10,7 +10,7 @@
 		"axios": "^1.7.7"
 	},
 	"scripts": {
-		"build": "tsc && cp config.json dist/ && cp -r node_modules dist/",
+		"build": "tsc && mkdir -p dist && cp config.json dist/ && cp -r node_modules dist/",
 		"start": "node dist/app.js",
 		"dev": "ts-node device-magic-proxy/app.ts",
 		"test": "mocha -r ts-node/register tests/unit/**/*.ts",
@@ -22,7 +22,7 @@
 		"clear-cache": "npm cache clean --force",
 		"build:no-cache": "npm run clean && npm run build && sam build --no-cached --parallel",
 		"test:api": "./test_api.sh",
-		"deploy:force": "rm -rf dist .aws-sam && sam build --parallel && sam deploy --profile mobit --force-upload"
+		"deploy:force": "rm -rf dist .aws-sam && sam build --parallel --debug && sam deploy --profile mobit --force-upload --debug"
 	},
 	"devDependencies": {
 		"@types/aws-lambda": "^8.10.131",
