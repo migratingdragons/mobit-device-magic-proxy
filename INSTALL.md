@@ -14,7 +14,7 @@ This guide will walk you through the process of installing, deploying, and setti
 
 1. Clone the repository (if using Git):
    ```
-   git clone https://github.com/your-repo/mobit-device-magic-proxy.git
+   git clone https://github.com/migratingdragons/mobit-device-magic-proxy.git
    cd mobit-device-magic-proxy
    ```
 
