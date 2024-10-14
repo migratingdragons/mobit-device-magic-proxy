@@ -12,9 +12,11 @@ Globals:
 Resources:
   DeviceMagicProxyFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: device-magic-proxy/dist/
-      Handler: app.lambdaHandler
+      CodeUri: device-magic-proxy/
+      Handler: dist/app.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
