@@ -27,6 +27,35 @@ For detailed installation and setup instructions, please refer to the [INSTALL.m
 
 After deployment, the application will provide an API Gateway endpoint. Configure Device Magic to send form submissions to this endpoint. The proxy will process the submissions based on the configuration in `config.json`.
 
+## Testing the Deployed Application
+
+After deploying the application, you can test it using the provided bash script. This script sends a POST request to your API Gateway endpoint with a sample payload based on your actual configuration.
+
+To use the script:
+
+1. Ensure you have `jq` installed on your system. If not, install it using your package manager (e.g., `sudo apt-get install jq` on Ubuntu or `brew install jq` on macOS).
+
+2. Navigate to the `device-magic-proxy` directory:
+   ```
+   cd device-magic-proxy
+   ```
+
+3. Make the script executable:
+   ```
+   chmod +x test_api.sh
+   ```
+
+4. Update the `API_ENDPOINT` variable in `test_api.sh` with your actual API Gateway endpoint URL.
+
+5. Run the test using npm:
+   ```
+   npm run test:api
+   ```
+
+This will send a POST request to your API with a payload using the first form namespace from your `config.json`. The response will be displayed in the terminal.
+
+Note: The script uses `jq` to parse the `config.json` file. Make sure you have `jq` installed on your system before running the script.
+
 ## Development
 
 This project uses TypeScript. To contribute to this project or make modifications:

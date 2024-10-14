@@ -20,7 +20,8 @@
 		"clean": "rm -rf dist",
 		"build:all": "npm run clean && npm run build && sam build",
 		"clear-cache": "npm cache clean --force",
-		"build:no-cache": "npm run clean && npm run build && sam build --no-cached --parallel"
+		"build:no-cache": "npm run clean && npm run build && sam build --no-cached --parallel",
+		"test:api": "./test_api.sh"
 	},
 	"devDependencies": {
 		"@types/aws-lambda": "^8.10.131",
