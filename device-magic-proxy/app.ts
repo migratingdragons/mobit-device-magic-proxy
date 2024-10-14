@@ -1,8 +1,9 @@
 import fs from "fs";
+import path from 'path';
 import axios from "axios";
 import { Config, Event, Context, Response } from "./types";
 
-const config: Config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
+const config: Config = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
 
 export const lambdaHandler = async (event: Event, context: Context): Promise<Response> => {
     try {

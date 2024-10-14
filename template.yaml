@@ -13,7 +13,7 @@ Resources:
   DeviceMagicProxyFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: device-magic-proxy/
+      CodeUri: device-magic-proxy/dist/
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
