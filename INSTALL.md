@@ -9,6 +9,7 @@ This guide will walk you through the process of installing, deploying, and setti
 3. SAM CLI installed
 4. Node.js 18.x installed
 5. Git (optional, for version control)
+6. TypeScript installed globally: `npm install -g typescript`
 
 ## Installation Steps
 
@@ -18,10 +19,11 @@ This guide will walk you through the process of installing, deploying, and setti
    cd mobit-device-magic-proxy
    ```
 
-2. Install dependencies:
+2. Install dependencies and build the TypeScript project:
    ```
    cd device-magic-proxy
    npm install
+   npm run build
    cd ..
    ```
 
@@ -40,7 +42,7 @@ This guide will walk you through the process of installing, deploying, and setti
 
 ## Configuration
 
-1. Update the `config.json` file in the `hello-world` directory with your form namespaces and destination URLs:
+1. Update the `config.json` file in the `device-magic-proxy` directory with your form namespaces and destination URLs:
    ```json
    [
      {
@@ -53,6 +55,7 @@ This guide will walk you through the process of installing, deploying, and setti
 
 2. Redeploy the application after making changes to the configuration:
    ```
+   npm run build
    sam build
    sam deploy --profile mobit
    ```
@@ -73,5 +76,6 @@ Send POST requests to the API Gateway endpoint URL with the Device Magic form da
 
 - Check CloudWatch Logs for detailed error messages and application logs.
 - Ensure that the `mobit` AWS CLI profile has the necessary permissions for deployment and execution.
+- If you encounter TypeScript-related issues, make sure you have built the project using `npm run build` before deploying.
 
 For any issues or questions, please contact your system administrator or open an issue in the project repository.
