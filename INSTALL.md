@@ -19,26 +19,34 @@ This guide will walk you through the process of installing, deploying, and setti
    cd mobit-device-magic-proxy
    ```
 
-2. Install dependencies and build the TypeScript project:
+2. Clear npm cache and install dependencies:
    ```
    cd device-magic-proxy
+   npm run clear-cache
+   rm -rf node_modules package-lock.json
    npm install
+   ```
+
+3. Build the TypeScript project:
+   ```
    npm run build
    cd ..
    ```
 
-3. Build the SAM application:
+4. Build the SAM application:
    ```
    npm run build:all
    ```
 
-4. Deploy the application:
+5. Deploy the application:
    ```
    npm run deploy
    ```
    Follow the prompts to configure your deployment. Make sure to use a unique stack name.
 
-5. Note the API Gateway endpoint URL from the outputs after deployment.
+6. Note the API Gateway endpoint URL from the outputs after deployment.
+
+If you encounter any issues during the build process, try running `npm run clear-cache` again and repeat the installation steps.
 
 ## Configuration
 
