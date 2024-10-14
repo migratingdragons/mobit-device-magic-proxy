@@ -61,7 +61,7 @@ This guide will walk you through the process of installing, deploying, and setti
 
 Run the unit tests:
 ```
-cd hello-world
+cd device-magic-proxy
 npm test
 ```
 
