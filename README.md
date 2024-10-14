@@ -47,6 +47,20 @@ npm run build
 
 This will generate the compiled JavaScript files in the `dist` directory.
 
+## Available Scripts
+
+- `npm run build`: Compile TypeScript files to JavaScript.
+- `npm start`: Run the compiled JavaScript application.
+- `npm run dev`: Run the TypeScript application directly (useful for development).
+- `npm test`: Run the unit tests.
+- `npm run lint`: Run TypeScript's type checking without emitting files.
+- `npm run deploy`: Build and deploy the SAM application with guided prompts.
+- `npm run deploy:quick`: Build and deploy the SAM application without guided prompts.
+- `npm run clean`: Remove the compiled files.
+- `npm run build:all`: Clean, build TypeScript files, and build the SAM application.
+
+To use these scripts, navigate to the `device-magic-proxy` directory before running the commands.
+
 ## Resources
 
 - [AWS SAM Developer Guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)

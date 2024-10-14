@@ -29,12 +29,12 @@ This guide will walk you through the process of installing, deploying, and setti
 
 3. Build the SAM application:
    ```
-   sam build
+   npm run build:all
    ```
 
 4. Deploy the application:
    ```
-   sam deploy --guided --profile mobit
+   npm run deploy
    ```
    Follow the prompts to configure your deployment. Make sure to use a unique stack name.
 
