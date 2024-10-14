@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import axios from "axios";
 
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
