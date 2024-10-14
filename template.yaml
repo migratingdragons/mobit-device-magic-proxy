@@ -9,6 +9,7 @@ Resources:
       CodeUri: device-magic-proxy/
       Handler: dist/app.lambdaHandler
       Runtime: nodejs18.x
+      Timeout: 30
       Events:
         DeviceMagicProxy:
           Type: Api
