@@ -7,7 +7,7 @@ const config: Config = JSON.parse(fs.readFileSync(path.join(__dirname, '../confi
 
 export async function processRequest(event: Event): Promise<Response> {
     try {
-        const body = event.body;
+        const body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
         const formNamespace = body.metadata.form_namespace;
 
         const formConfig = config.find((c) => c.form_namespace === formNamespace);

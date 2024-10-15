@@ -7,7 +7,7 @@ export interface ConfigItem {
 export type Config = ConfigItem[];
 
 export interface Event {
-    body: any;
+    body: string | any;
 }
 
 export interface Response {
