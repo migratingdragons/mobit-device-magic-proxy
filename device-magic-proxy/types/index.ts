@@ -7,20 +7,7 @@ export interface ConfigItem {
 export type Config = ConfigItem[];
 
 export interface Event {
-    body: string;
-    resource: string;
-    path: string;
-    httpMethod: string;
-    isBase64Encoded: boolean;
-    queryStringParameters: any;
-    pathParameters: any;
-    stageVariables: any;
-    headers: any;
-    requestContext: any;
-}
-
-export interface Context {
-    // Add any necessary context properties
+    body: any;
 }
 
 export interface Response {

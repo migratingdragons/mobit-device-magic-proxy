@@ -1,18 +1,18 @@
-import fs from "fs";
+import fs from 'fs';
 import path from 'path';
-import axios from "axios";
-import { Config, Event, Context, Response } from "./types";
+import axios from 'axios';
+import { Config, Event, Response } from './types';
 
-const config: Config = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
+const config: Config = JSON.parse(fs.readFileSync(path.join(__dirname, '../config.json'), 'utf8'));
 
-export const lambdaHandler = async (event: Event, context: Context): Promise<Response> => {
+export async function processRequest(event: Event): Promise<Response> {
     try {
-        const body = JSON.parse(event.body);
+        const body = event.body;
         const formNamespace = body.metadata.form_namespace;
 
         const formConfig = config.find((c) => c.form_namespace === formNamespace);
         if (!formConfig) {
-            throw new Error("Form namespace not found in configurationo");
+            throw new Error("Form namespace not found in configuration");
         }
 
         const response = await axios.post(formConfig.destination_url, body, {
@@ -35,4 +35,4 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
             body: JSON.stringify({ error: "Internal server error" }),
         };
     }
-};
+}
