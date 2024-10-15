@@ -4,7 +4,7 @@
 	"description": "Device Magic Proxy for Mobit",
 	"main": "app.js",
 	"scripts": {
-		"build": "tsc && cp config.json .",
+		"build": "tsc && [ -f config.json ] || cp config.json .",
 		"deploy": "npm run build && sam build && sam deploy --profile mobit --force-upload"
 	},
 	"dependencies": {
