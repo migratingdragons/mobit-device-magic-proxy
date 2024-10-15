@@ -12,7 +12,7 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
 
         const formConfig = config.find((c) => c.form_namespace === formNamespace);
         if (!formConfig) {
-            throw new Error("Form namespace not found in configuration");
+            throw new Error("Form namespace not found in configurationo");
         }
 
         const response = await axios.post(formConfig.destination_url, body, {
