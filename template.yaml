@@ -7,7 +7,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: device-magic-proxy/
-      Handler: dist/app.lambdaHandler
+      Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Timeout: 30
       Events:

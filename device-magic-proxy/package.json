@@ -2,9 +2,9 @@
 	"name": "mobit-device-magic-proxy",
 	"version": "1.0.0",
 	"description": "Device Magic Proxy for Mobit",
-	"main": "dist/app.js",
+	"main": "app.js",
 	"scripts": {
-		"build": "tsc && cp config.json dist/",
+		"build": "tsc && cp config.json .",
 		"deploy": "npm run build && sam build && sam deploy --profile mobit --force-upload"
 	},
 	"dependencies": {
