@@ -6,7 +6,7 @@ Resources:
   DeviceMagicProxyFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: device-magic-proxy/
+      CodeUri: device-magic-proxy-js/
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Timeout: 30
