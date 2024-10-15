@@ -17,7 +17,7 @@ sam build
 
 # Step 3: Deploy the SAM application
 echo "Deploying SAM application..."
-sam deploy --stack-name device-magic-proxy-stack --profile mobit --region eu-west-2 --capabilities CAPABILITY_IAM --no-confirm-changeset
+sam deploy --stack-name device-magic-proxy  --resolve-s3 --profile mobit --region eu-west-2 --capabilities CAPABILITY_IAM --no-confirm-changeset
 
 # Step 4: Run the test API script
 echo "Running test API script..."
