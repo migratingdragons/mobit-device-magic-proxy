@@ -4,7 +4,8 @@
 	"description": "Device Magic Proxy for Mobit",
 	"main": "app.js",
 	"scripts": {
-		"build": "tsc && cp config.json ../device-magic-proxy-js/ && cp package.json ../device-magic-proxy-js/ && cd ../device-magic-proxy-js && npm install --production"
+		"build": "tsc && cp config.json ../device-magic-proxy-js/ && cp package.json ../device-magic-proxy-js/ && cd ../device-magic-proxy-js && npm install --production",
+		"test": "mocha -r ts-node/register tests/**/*.ts"
 	},
 	"dependencies": {
 		"axios": "^1.7.7"
@@ -12,6 +13,13 @@
 	"devDependencies": {
 		"@types/aws-lambda": "^8.10.131",
 		"@types/node": "^20.10.5",
-		"typescript": "^5.3.3"
+		"typescript": "^5.3.3",
+		"mocha": "^10.2.0",
+		"chai": "^4.3.7",
+		"@types/mocha": "^10.0.1",
+		"@types/chai": "^4.3.5",
+		"ts-node": "^10.9.1",
+		"sinon": "^15.2.0",
+		"@types/sinon": "^10.0.15"
 	}
 }
