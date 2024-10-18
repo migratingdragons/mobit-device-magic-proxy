@@ -10,6 +10,7 @@ This guide will walk you through the process of installing, deploying, and setti
 4. Node.js 18.x installed
 5. Git (optional, for version control)
 6. TypeScript installed globally: `npm install -g typescript`
+7. jq command-line JSON processor (for running the test_api.sh script)
 
 ## Installation Steps
 
@@ -19,11 +20,9 @@ This guide will walk you through the process of installing, deploying, and setti
    cd mobit-device-magic-proxy
    ```
 
-2. Clear npm cache and install dependencies:
+2. Install dependencies:
    ```
    cd device-magic-proxy
-   npm run clear-cache
-   rm -rf node_modules package-lock.json
    npm install
    ```
 
@@ -33,20 +32,13 @@ This guide will walk you through the process of installing, deploying, and setti
    cd ..
    ```
 
-4. Build the SAM application:
+4. Deploy the application:
    ```
-   npm run build:all
+   ./deploy.sh
    ```
+   This script will build the TypeScript project, build the SAM application, deploy it, and run the test API script.
 
-5. Deploy the application:
-   ```
-   npm run deploy
-   ```
-   Follow the prompts to configure your deployment. Make sure to use a unique stack name.
-
-6. Note the API Gateway endpoint URL from the outputs after deployment.
-
-If you encounter any issues during the build process, try running `npm run clear-cache` again and repeat the installation steps.
+5. Note the API Gateway endpoint URL from the outputs after deployment.
 
 ## Configuration
 
@@ -61,20 +53,22 @@ If you encounter any issues during the build process, try running `npm run clear
    ]
    ```
 
-2. Redeploy the application after making changes to the configuration:
-   ```
-   npm run build
-   sam build
-   sam deploy --profile mobit
-   ```
+2. Redeploy the application after making changes to the configuration by running the `deploy.sh` script again.
 
 ## Testing
 
-Run the unit tests:
-```
-cd device-magic-proxy
-npm test
-```
+1. Run the unit tests:
+   ```
+   cd device-magic-proxy
+   npm test
+   ```
+
+2. Test the deployed API:
+   ```
+   cd device-magic-proxy
+   ./test_api.sh
+   ```
+   Make sure to update the `API_ENDPOINT` variable in the `test_api.sh` script with your actual API Gateway endpoint URL.
 
 ## Usage
 
@@ -83,7 +77,8 @@ Send POST requests to the API Gateway endpoint URL with the Device Magic form da
 ## Troubleshooting
 
 - Check CloudWatch Logs for detailed error messages and application logs.
-- Ensure that the `mobit` AWS CLI profile has the necessary permissions for deployment and execution.
+- Ensure that the AWS CLI profile used has the necessary permissions for deployment and execution.
 - If you encounter TypeScript-related issues, make sure you have built the project using `npm run build` before deploying.
+- If the `test_api.sh` script fails, ensure that `jq` is installed on your system and that the API endpoint URL is correct.
 
 For any issues or questions, please contact your system administrator or open an issue in the project repository.
