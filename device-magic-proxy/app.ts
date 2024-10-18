@@ -11,7 +11,7 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
         const formNamespace = body.metadata.form_namespace;
         console.log(JSON.stringify(event.body));
 
-        const formConfig = config.find((c) => c.form_namespace === formNamespace);
+        const formConfig = config.find((c) => formNamespace.startsWith(c.form_namespace));
         if (!formConfig) {
             throw new Error("Form namespace not found in configuration");
         }
