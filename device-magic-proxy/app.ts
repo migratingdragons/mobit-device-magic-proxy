@@ -9,6 +9,7 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
     try {
         const body = JSON.parse(event.body);
         const formNamespace = body.metadata.form_namespace;
+        console.log(JSON.stringify(event.body));
 
         const formConfig = config.find((c) => c.form_namespace === formNamespace);
         if (!formConfig) {
