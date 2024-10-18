@@ -13,7 +13,14 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
 
         const formConfig = config.find((c) => formNamespace.startsWith(c.form_namespace));
         if (!formConfig) {
-            throw new Error("Form namespace not found in configuration");
+            console.error(`Form namespace not found: ${formNamespace}`);
+            return {
+                statusCode: 404,
+                body: JSON.stringify({ 
+                    error: "Form namespace not found in configuration",
+                    namespace: formNamespace
+                }),
+            };
         }
 
         const response = await axios.post(formConfig.destination_url, body, {
@@ -31,9 +38,18 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
         };
     } catch (err) {
         console.error(err);
+        if (err instanceof Error) {
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ 
+                    error: "Internal server error",
+                    message: err.message
+                }),
+            };
+        }
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: "Internal server error" }),
+            body: JSON.stringify({ error: "Unknown error occurred" }),
         };
     }
 };
