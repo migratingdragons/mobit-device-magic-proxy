@@ -3,7 +3,8 @@
 		"name": "UPOWA 1.Panel Installation Check Sheet",
 		"form_namespace": "http://www.devicemagic.com/xforms/f6c1fb10-2ab0-013b-a6a7-661e80d8c327",
 		"destination_urls": [
-			"https://script.google.com/macros/s/AKfycbxSe7MbW6d9EbbAsv9enuWF84po_mkoapsMG2jZwCwQ5Xd_2xD3ce6D_O2ZJ0YGzbcG1Q/exec"
+			"https://script.google.com/macros/s/AKfycbxSe7MbW6d9EbbAsv9enuWF84po_mkoapsMG2jZwCwQ5Xd_2xD3ce6D_O2ZJ0YGzbcG1Q/exec",
+			"https://script.google.com/macros/s/AKfycbyE5SdLGWYof042pixMGjKfYfDt14TnDRowfMrOTPShBNN2j5vm3s3kBJoOUp_nC0At/exec"
 		]
 	},
 	{
@@ -21,4 +22,5 @@
 			"https://script.google.com/macros/s/AKfycbzxc3m3SXEgpz-3NOHLkv5NkZsCnosmlZ644vxteF_ZlauIk3QuPbDW5S-96LUMp3oWCQ/exec"
 		]
 	}
+
 ]
