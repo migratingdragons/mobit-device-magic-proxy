@@ -37,6 +37,20 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
             formConfig.destination_urls.map(url => 
                 axios.post(url, body, {
                     maxRedirects: 5,
+                    validateStatus: function (status) {
+                        return status >= 200 && status < 400; // Accept redirects as valid
+                    }
+                }).then(response => {
+                    console.log(`Destination URL: ${url}`);
+                    console.log(`Initial status: ${response.status}`);
+                    if (response.request && response.request._redirectable) {
+                        const redirects = response.request._redirectable._redirectCount;
+                        console.log(`Redirects followed: ${redirects}`);
+                        if (redirects > 0) {
+                            console.log(`Final URL after redirects: ${response.request.res.responseUrl}`);
+                        }
+                    }
+                    return response;
                 })
             )
         ).then(responses => {
@@ -44,10 +58,20 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
             console.log(`Submission ID: ${body.metadata.submission_id}`);
             console.log(`Datetime: ${new Date().toISOString()}`);
             responses.forEach((response, index) => {
-                console.log(`Status for destination ${index + 1}: ${response.status === 200 ? "Success" : "Fail"}`);
+                const status = response.status;
+                const statusText = response.statusText;
+                console.log(`Destination ${index + 1} final status: ${status} (${statusText})`);
+                console.log(`Success: ${status >= 200 && status < 300 ? "Yes" : "No"}`);
             });
         }).catch(err => {
             console.error('Background processing error:', err);
+            if (err.response) {
+                console.error(`Response status: ${err.response.status}`);
+                console.error(`Response data:`, err.response.data);
+            }
+            if (err.request) {
+                console.error('Request was made but no response received');
+            }
         });
 
         return response;
