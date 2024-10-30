@@ -23,14 +23,20 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
             };
         }
 
-        const response = await axios.post(formConfig.destination_url, body, {
-            maxRedirects: 5,
-        });
+        const responses = await Promise.all(
+            formConfig.destination_urls.map(url => 
+                axios.post(url, body, {
+                    maxRedirects: 5,
+                })
+            )
+        );
 
         console.log(`Namespace: ${formNamespace}`);
         console.log(`Submission ID: ${body.metadata.submission_id}`);
         console.log(`Datetime: ${new Date().toISOString()}`);
-        console.log(`Status: ${response.status === 200 ? "Success" : "Fail"}`);
+        responses.forEach((response, index) => {
+            console.log(`Status for destination ${index + 1}: ${response.status === 200 ? "Success" : "Fail"}`);
+        });
 
         return {
             statusCode: 200,

@@ -2,11 +2,15 @@
 	{
 		"name": "UPOWA 1.Panel Installation Check Sheet",
 		"form_namespace": "http://www.devicemagic.com/xforms/f6c1fb10-2ab0-013b-a6a7-661e80d8c327",
-		"destination_url": "https://script.google.com/macros/s/AKfycbxSe7MbW6d9EbbAsv9enuWF84po_mkoapsMG2jZwCwQ5Xd_2xD3ce6D_O2ZJ0YGzbcG1Q/exec"
+		"destination_urls": [
+			"https://script.google.com/macros/s/AKfycbxSe7MbW6d9EbbAsv9enuWF84po_mkoapsMG2jZwCwQ5Xd_2xD3ce6D_O2ZJ0YGzbcG1Q/exec"
+		]
 	},
 	{
 		"name": "UPOWA 6.Audit Form",
 		"form_namespace": "http://www.devicemagic.com/xforms/752ba230-5cae-013d-8a0b-620dcf7168bf",
-		"destination_url": "https://script.google.com/macros/s/AKfycbzxc3m3SXEgpz-3NOHLkv5NkZsCnosmlZ644vxteF_ZlauIk3QuPbDW5S-96LUMp3oWCQ/exec"
+		"destination_urls": [
+			"https://script.google.com/macros/s/AKfycbzxc3m3SXEgpz-3NOHLkv5NkZsCnosmlZ644vxteF_ZlauIk3QuPbDW5S-96LUMp3oWCQ/exec"
+		]
 	}
 ]

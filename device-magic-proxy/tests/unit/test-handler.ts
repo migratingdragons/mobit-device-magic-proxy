@@ -15,7 +15,7 @@ describe("Device Magic Proxy Tests", () => {
         {
             name: "UPOWA 6.Audit Form",
             form_namespace: "http://www.devicemagic.com/xforms/752ba230-5cae-013d-8a0b-620dcf7168bf",
-            destination_url: "https://script.google.com/macros/s/test-script-id/exec"
+            destination_urls: ["https://script.google.com/macros/s/test-script-id/exec"]
         }
     ];
 
@@ -87,7 +87,7 @@ describe("Device Magic Proxy Tests", () => {
         expect(response.message).to.equal("Request processed successfully");
 
         sinon.assert.calledOnce(axiosPostStub);
-        sinon.assert.calledWith(axiosPostStub, testConfig[0].destination_url, testPayload);
+        sinon.assert.calledWith(axiosPostStub, testConfig[0].destination_urls[0], testPayload);
 
         sinon.assert.calledWith(consoleLogStub, `Namespace: ${testPayload.metadata.form_namespace}`);
         sinon.assert.calledWith(consoleLogStub, `Submission ID: ${testPayload.metadata.submission_id}`);
