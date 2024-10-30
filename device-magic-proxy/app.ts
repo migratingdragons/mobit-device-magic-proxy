@@ -6,6 +6,9 @@ import { Config, Event, Context, Response } from "./types";
 const config: Config = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
 
 export const lambdaHandler = async (event: Event, context: Context): Promise<Response> => {
+    // Tell Lambda not to wait for the event loop to be empty before returning
+    context.callbackWaitsForEmptyEventLoop = false;
+    
     try {
         const body = JSON.parse(event.body);
         const formNamespace = body.metadata.form_namespace;
@@ -23,25 +26,31 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
             };
         }
 
-        const responses = await Promise.all(
+        // Return success immediately
+        const response: Response = {
+            statusCode: 200,
+            body: JSON.stringify({ message: "Request accepted for processing" }),
+        };
+
+        // Process the webhooks in the background
+        Promise.all(
             formConfig.destination_urls.map(url => 
                 axios.post(url, body, {
                     maxRedirects: 5,
                 })
             )
-        );
-
-        console.log(`Namespace: ${formNamespace}`);
-        console.log(`Submission ID: ${body.metadata.submission_id}`);
-        console.log(`Datetime: ${new Date().toISOString()}`);
-        responses.forEach((response, index) => {
-            console.log(`Status for destination ${index + 1}: ${response.status === 200 ? "Success" : "Fail"}`);
+        ).then(responses => {
+            console.log(`Namespace: ${formNamespace}`);
+            console.log(`Submission ID: ${body.metadata.submission_id}`);
+            console.log(`Datetime: ${new Date().toISOString()}`);
+            responses.forEach((response, index) => {
+                console.log(`Status for destination ${index + 1}: ${response.status === 200 ? "Success" : "Fail"}`);
+            });
+        }).catch(err => {
+            console.error('Background processing error:', err);
         });
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: "Request processed successfully" }),
-        };
+        return response;
     } catch (err) {
         console.error(err);
         if (err instanceof Error) {

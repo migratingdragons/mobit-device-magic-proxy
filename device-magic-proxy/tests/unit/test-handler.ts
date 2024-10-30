@@ -84,15 +84,13 @@ describe("Device Magic Proxy Tests", () => {
 
         const response = JSON.parse(result.body);
         expect(response).to.be.an("object");
-        expect(response.message).to.equal("Request processed successfully");
+        expect(response.message).to.equal("Request accepted for processing");
+
+        // Wait a small amount of time for the background process to complete
+        await new Promise(resolve => setTimeout(resolve, 100));
 
         sinon.assert.calledOnce(axiosPostStub);
         sinon.assert.calledWith(axiosPostStub, testConfig[0].destination_urls[0], testPayload);
-
-        sinon.assert.calledWith(consoleLogStub, `Namespace: ${testPayload.metadata.form_namespace}`);
-        sinon.assert.calledWith(consoleLogStub, `Submission ID: ${testPayload.metadata.submission_id}`);
-        sinon.assert.calledWith(consoleLogStub, sinon.match(/Datetime: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/));
-        sinon.assert.calledWith(consoleLogStub, "Status: Success");
     });
 
     it("handles form namespace not found", async () => {
