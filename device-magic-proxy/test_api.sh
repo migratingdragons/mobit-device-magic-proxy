@@ -11,10 +11,10 @@ PAYLOAD=$(cat <<EOF
 	"metadata": {
 		"device_id": "iPad_A8093B1F-64B1-417F-BF0F-B037D262B8F2",
 		"user_id": null,
-		"username": "UPOWA-Jamie Barron",
+		"username": "TEST TEST",
 		"submitted_at": "2024-10-17 16:45:38 +01:00",
 		"received_at": "2024-10-17 15:45:40 +00:00",
-		"submission_id": "97685176",
+		"submission_id": "00000",
 		"device_submission_identifier": "C7E762E9-CB89-4F93-B367-5969A1C3CC07",
 		"submission_counter": "22",
 		"author_identifier": "iPad_A8093B1F-64B1-417F-BF0F-B037D262B8F2",
@@ -42,19 +42,19 @@ PAYLOAD=$(cat <<EOF
 			"value": "71"
 		},
 		"Installer": {
-			"value": "Jay Macgill-Patel"
+			"value": "TEST TEST"
 		},
 		"Install_date": {
 			"value": "2024-10-15"
 		},
 		"Auditor": {
-			"value": "Jamie Barron"
+			"value": "TEST TESTn"
 		},
 		"Authorised_for_NC": {
 			"value": "YES"
 		},
 		"Auditor_Company": {
-			"value": "Upowa"
+			"value": "TEST "
 		},
 		"Audit_Date": {
 			"value": "2024-10-15"
@@ -68,10 +68,10 @@ PAYLOAD=$(cat <<EOF
 			"value": false
 		},
 		"Notes": {
-			"value": "? Are the bottom flashings installed ok,"
+			"value": "This is a test - please delete"
 		},
 		"Approval_Notes": {
-			"value": "Will speak with installer"
+			"value": "please delete"
 		},
 		"Pic_6": {
 			"value": "/home/testlolasdfa/Pic_6[1].JPEG"
