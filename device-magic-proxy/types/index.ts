@@ -1,3 +1,5 @@
+import { Context as AWSContext } from 'aws-lambda';
+
 export interface ConfigItem {
     name: string;
     form_namespace: string;
@@ -19,9 +21,7 @@ export interface Event {
     requestContext: any;
 }
 
-export interface Context {
-    // Add any necessary context properties
-}
+export type Context = AWSContext;
 
 export interface Response {
     statusCode: number;
