@@ -5,6 +5,13 @@ import http from 'http';
 import https from 'https';
 import { Config, Event, Context, Response } from "./types";
 
+const RETRY_CONFIG = {
+  attempts: 3,
+  initialDelay: 1000,
+  maxDelay: 4000,
+  backoffFactor: 2
+};
+
 const AXIOS_CONFIG = {
     timeout: 29000, // 29 second timeout (Lambda max is 30s)
     maxContentLength: 10485760, // 10MB
@@ -21,19 +28,32 @@ const AXIOS_CONFIG = {
     httpsAgent: new https.Agent({ keepAlive: true })
 };
 
-async function retryRequest(url: string, data: any, retries = 3): Promise<any> {
-    for (let attempt = 0; attempt < retries; attempt++) {
+async function submitToEndpoint(url: string, data: any): Promise<boolean> {
+    for (let attempt = 1; attempt <= RETRY_CONFIG.attempts; attempt++) {
         try {
             const response = await axios.post(url, data, AXIOS_CONFIG);
-            return response;
-        } catch (error) {
-            if (attempt === retries - 1) throw error;
-            
-            const waitTime = Math.min(1000 * Math.pow(2, attempt), 8000); // Max 8 second wait
-            console.log(`Request failed, retrying in ${waitTime}ms... (Attempt ${attempt + 1}/${retries})`);
-            await new Promise(resolve => setTimeout(resolve, waitTime));
+            console.log(`Successfully submitted to ${url} (Status: ${response.status})`);
+            return true;
+        } catch (error: any) {
+            const delay = Math.min(
+                RETRY_CONFIG.initialDelay * Math.pow(RETRY_CONFIG.backoffFactor, attempt - 1),
+                RETRY_CONFIG.maxDelay
+            );
+
+            if (attempt === RETRY_CONFIG.attempts) {
+                console.error(`Failed to send to ${url}: ${error.message}`);
+                if (error.response) {
+                    console.error('Response status:', error.response.status);
+                    console.error('Response data:', error.response.data);
+                }
+                return false;
+            }
+
+            console.log(`Attempt ${attempt} failed, retrying in ${delay}ms...`);
+            await new Promise(resolve => setTimeout(resolve, delay));
         }
     }
+    return false;
 }
 
 const config: Config = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
@@ -65,38 +85,31 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
             body: JSON.stringify({ message: "Request accepted for processing" }),
         };
 
-        // Process the webhooks in the background
-        Promise.all(
+        const results = await Promise.all(
             formConfig.destination_urls.map(async url => {
-                try {
-                    const response = await retryRequest(url, body);
-                    console.log(`Successfully sent to ${url}`);
-                    console.log(`Status: ${response.status}`);
-                    return response;
-                } catch (error: any) {
-                    console.error(`Failed to send to ${url}:`, error.message);
-                    if (error.response) {
-                        console.error('Response status:', error.response.status);
-                        console.error('Response data:', error.response.data);
-                    }
-                    throw error; // Re-throw to be caught by the outer catch
-                }
+                const success = await submitToEndpoint(url, body);
+                return { url, success };
             })
-        ).then(responses => {
-            console.log(`Namespace: ${formNamespace}`);
-            console.log(`Submission ID: ${body.metadata.submission_id}`);
-            console.log(`Datetime: ${new Date().toISOString()}`);
-            responses.forEach((response, index) => {
-                console.log(`Destination ${index + 1} status: ${response.status}`);
-            });
-        }).catch(err => {
-            console.error('Background processing error:', {
-                message: err.message,
-                code: err.code,
-                status: err.response?.status,
-                data: err.response?.data
-            });
+        );
+
+        // Log results
+        console.log(`Form namespace: ${formNamespace}`);
+        console.log(`Submission ID: ${body.metadata.submission_id}`);
+        console.log(`Timestamp: ${new Date().toISOString()}`);
+        results.forEach(({url, success}) => {
+            console.log(`Endpoint ${url}: ${success ? 'Success' : 'Failed'}`);
         });
+
+        // If any submissions failed, return error status
+        if (results.some(r => !r.success)) {
+            return {
+                statusCode: 207,
+                body: JSON.stringify({
+                    message: "Partial success - some endpoints failed",
+                    details: results
+                })
+            };
+        }
 
         return response;
     } catch (err) {
