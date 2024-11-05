@@ -27,3 +27,16 @@ export interface Response {
     statusCode: number;
     body: string;
 }
+
+export interface AxiosErrorResponse {
+    status?: number;
+    data?: any;
+    message?: string;
+    code?: string;
+}
+
+export interface RetryConfig {
+    maxRetries: number;
+    initialDelay: number;
+    maxDelay: number;
+}

@@ -1,7 +1,40 @@
 import fs from "fs";
 import path from 'path';
 import axios from "axios";
+import http from 'http';
+import https from 'https';
 import { Config, Event, Context, Response } from "./types";
+
+const AXIOS_CONFIG = {
+    timeout: 29000, // 29 second timeout (Lambda max is 30s)
+    maxContentLength: 10485760, // 10MB
+    maxBodyLength: 10485760, // 10MB
+    decompress: true, // Handle gzip responses
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept-Encoding': 'gzip',
+        'Connection': 'keep-alive'
+    },
+    validateStatus: (status: number) => status >= 200 && status < 400,
+    maxRedirects: 5,
+    httpAgent: new http.Agent({ keepAlive: true }),
+    httpsAgent: new https.Agent({ keepAlive: true })
+};
+
+async function retryRequest(url: string, data: any, retries = 3): Promise<any> {
+    for (let attempt = 0; attempt < retries; attempt++) {
+        try {
+            const response = await axios.post(url, data, AXIOS_CONFIG);
+            return response;
+        } catch (error) {
+            if (attempt === retries - 1) throw error;
+            
+            const waitTime = Math.min(1000 * Math.pow(2, attempt), 8000); // Max 8 second wait
+            console.log(`Request failed, retrying in ${waitTime}ms... (Attempt ${attempt + 1}/${retries})`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
+        }
+    }
+}
 
 const config: Config = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
 
@@ -34,44 +67,35 @@ export const lambdaHandler = async (event: Event, context: Context): Promise<Res
 
         // Process the webhooks in the background
         Promise.all(
-            formConfig.destination_urls.map(url => 
-                axios.post(url, body, {
-                    maxRedirects: 5,
-                    validateStatus: function (status) {
-                        return status >= 200 && status < 400; // Accept redirects as valid
-                    }
-                }).then(response => {
-                    console.log(`Destination URL: ${url}`);
-                    console.log(`Initial status: ${response.status}`);
-                    if (response.request && response.request._redirectable) {
-                        const redirects = response.request._redirectable._redirectCount;
-                        console.log(`Redirects followed: ${redirects}`);
-                        if (redirects > 0) {
-                            console.log(`Final URL after redirects: ${response.request.res.responseUrl}`);
-                        }
-                    }
+            formConfig.destination_urls.map(async url => {
+                try {
+                    const response = await retryRequest(url, body);
+                    console.log(`Successfully sent to ${url}`);
+                    console.log(`Status: ${response.status}`);
                     return response;
-                })
-            )
+                } catch (error: any) {
+                    console.error(`Failed to send to ${url}:`, error.message);
+                    if (error.response) {
+                        console.error('Response status:', error.response.status);
+                        console.error('Response data:', error.response.data);
+                    }
+                    throw error; // Re-throw to be caught by the outer catch
+                }
+            })
         ).then(responses => {
             console.log(`Namespace: ${formNamespace}`);
             console.log(`Submission ID: ${body.metadata.submission_id}`);
             console.log(`Datetime: ${new Date().toISOString()}`);
             responses.forEach((response, index) => {
-                const status = response.status;
-                const statusText = response.statusText;
-                console.log(`Destination ${index + 1} final status: ${status} (${statusText})`);
-                console.log(`Success: ${status >= 200 && status < 300 ? "Yes" : "No"}`);
+                console.log(`Destination ${index + 1} status: ${response.status}`);
             });
         }).catch(err => {
-            console.error('Background processing error:', err);
-            if (err.response) {
-                console.error(`Response status: ${err.response.status}`);
-                console.error(`Response data:`, err.response.data);
-            }
-            if (err.request) {
-                console.error('Request was made but no response received');
-            }
+            console.error('Background processing error:', {
+                message: err.message,
+                code: err.code,
+                status: err.response?.status,
+                data: err.response?.data
+            });
         });
 
         return response;
